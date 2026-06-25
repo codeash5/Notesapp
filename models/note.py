@@ -8,6 +8,6 @@ class Note(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, nullable=False)
     content = Column(String)
-    owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    owner_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
 
     owner = relationship("User", back_populates="notes")
