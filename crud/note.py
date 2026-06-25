@@ -3,9 +3,14 @@ from models.note import Note
 from schemas.note import NoteCreate, NoteUpdate
 
 
-def get_user_notes(db: Session, user_id: int):
-    # Only fetch notes belonging to this specific user
-    return db.query(Note).filter(Note.owner_id == user_id).all()
+def get_user_notes(db: Session, user_id: int, limit: int = 10, offset: int = 0):
+    return (
+        db.query(Note)
+        .filter(Note.owner_id == user_id)
+        .offset(offset)
+        .limit(limit)
+        .all()
+    )
 
 
 def get_note(db: Session, note_id: int, user_id: int):
